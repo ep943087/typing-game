@@ -1,0 +1,118 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+#myCanvas{
+    width: 100%;
+    height: 100%;
+}
+
+.game{
+    width: 100%;
+    height: 400px;
+    max-width: 916px;
+    border: 1px solid black;
+    margin-top: 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.game__menu{
+    position: absolute;
+    left: calc(50% - 30%);
+    top: calc(50% - 30%);
+    width: 60%;
+    height: 60%;
+    z-index: 100;
+    background-color: rgba(206,152,95,1);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 25% 25% 25% 25%;
+    grid-template-areas: ". ." ". ." ". ." "play play";
+    grid-gap: 5px;
+    transition: transform .5s ease-in;
+}
+
+.game__tools{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(206,152,95,1);
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    width: 40%;
+    height: 40px;
+}
+
+.game__score{
+    position: absolute;
+    background-color: rgba(206,152,95,1);
+    top: 5px;
+    right: 5px;
+    width: 40%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button:hover{
+    cursor: pointer;
+}
+
+.play-button{
+    grid-area: play;
+}
+
+.remove{
+    transform: translateY(-150%);
+}
+
+body,html{
+    height: 100%;
+}
+
+body{
+    display: grid;
+    grid-template-rows: 4rem 1fr auto;
+    grid-template-columns: 100vw;
+    grid-template-areas: "header" "main" "footer";
+}
+
+header{
+    z-index: 200;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4rem;
+    grid-area: header;
+    background-color: blue;
+}
+
+main{
+    grid-area: main;
+    background-color: gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer{
+    grid-area: footer;
+    background-color: black;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
