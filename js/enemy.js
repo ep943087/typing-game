@@ -41,6 +41,7 @@ class Enemy{
             this.enemyType += 'r';
     }
 
+
     getImage(){
         let img;
         switch(this.enemyType){
@@ -54,7 +55,7 @@ class Enemy{
             case 'lfr': img = lfr; break;
             default: return null;
         }
-        const fps = 60;
+        const fps = 30;
         this.walkIndex = (this.walkIndex + 1) % fps;
 
         const index = Math.floor(this.walkIndex / fps * img.length);
@@ -87,7 +88,7 @@ class Enemy{
         ctx.drawImage(img,this.x-imgw/2,this.y-imgh/2,imgw,imgh);
 
         // word
-        const sp = 8;
+        const sp = 9;
         const width = this.word.length * sp;
         const start = this.x - width / 2;
         const wordTop = this.y - this.radius*.75;

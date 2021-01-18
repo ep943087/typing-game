@@ -4,6 +4,38 @@ class Enemies{
     constructor(){
         this.vel = .4;
         this.reset();
+        this.initEnemies();
+    }
+
+    initEnemies(){
+        const michael = new Enemy();
+        michael.enemyType = "mmr";
+        michael.x = 100;
+        michael.y = 155;
+        michael.word = 'Michael Myers'.split('');
+
+        const freddy = new Enemy();
+        freddy.enemyType = "fr";
+        freddy.x = 100;
+        freddy.y = 285;
+        freddy.word = 'Freddy Krueger'.split('');
+
+        const leather_face = new Enemy();
+        leather_face.enemyType = "lfl";
+        leather_face.x = 816;
+        leather_face.y = 285;
+        leather_face.word = 'Leather Face'.split('');
+
+        const jason = new Enemy();
+        jason.enemyType = "jl";
+        jason.x = 816;
+        jason.y = 155;
+        jason.word = 'Jason Voorhees'.split('');
+
+        this.list[0][0].push(michael);
+        this.list[0][0].push(freddy);
+        this.list[0][0].push(leather_face);
+        this.list[0][0].push(jason);
     }
     reset(){
         this.list = new Array(5);
@@ -12,7 +44,8 @@ class Enemies{
             for(let j=0;j<2;j++){
                 this.list[i][j] = [];
             }
-        }    }
+        }    
+    }
     searchEnemy(player){
         const list = this.list[player.index][player.direction];
         if(list.length === 0){
@@ -76,6 +109,11 @@ class Enemies{
                     const moved = e.move(dir*this.vel, c);
                     if(!moved){
                         player.borders[j]--;
+                        if(j === 0){
+                            player.bh1 = true;
+                        } else{
+                            player.bh2 = true;
+                        }
                     }
                 })
             }

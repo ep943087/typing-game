@@ -22,6 +22,8 @@ class Player{
         this.movePerc = 15;
         this.kills = 0;
         this.score = 0;
+        this.bh1 = false;
+        this.bh2 = false;
     }
 
     resetEnemy(){
@@ -78,7 +80,7 @@ class Player{
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.moveTo(x,y);
-        ctx.lineTo(x + 300*dir,y);
+        ctx.lineTo(x + 250*dir,y);
         ctx.stroke();
 
         // draw border
@@ -102,8 +104,21 @@ class Player{
         if(h2 < .5) i2 = 1;
         if(this.borders[1] <= 0) i2 = 2;
 
-        ctx.drawImage(grave[i1],bx1,btop,grave[i1].width*3,grave[i1].height*3);
-        ctx.drawImage(grave[i2],bx2,btop,grave[i2].width*3,grave[i2].height*3);
+        
+        let shake1 = 0;
+        if(this.bh1 && this.borders[0] > 0){
+            const ch = Math.random() < .5? -1 : 1;
+            shake1 = ch;
+            this.bh1 = false;
+        }
+        let shake2 = 0;
+        if(this.bh2 && this.borders[1] > 0){
+            const ch = Math.random() < .5? -1 : 1;
+            shake2 = ch;
+            this.bh2 = false;
+        }
+        ctx.drawImage(grave[i1],bx1 + shake1,btop,grave[i1].width*3,grave[i1].height*3);
+        ctx.drawImage(grave[i2],bx2 + shake2,btop,grave[i2].width*3,grave[i2].height*3);
 
         // draw character
         ctx.fillStyle = "white";

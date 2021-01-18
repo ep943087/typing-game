@@ -15,7 +15,7 @@ const highScore = document.querySelector('.high-score');
 
 const ctx = c.getContext('2d');
 let state = 'menu';
-let player = null;
+let player = new Player();
 const enemies = new Enemies();
 
 (() => {
