@@ -48,7 +48,7 @@ class Enemies{
 
         const x = dir===0? 0 : c.width;
         const y = top + rowHeight*index;
-        this.list[index][dir].push(new Enemy(x,y));
+        this.list[index][dir].push(new Enemy(x,y,dir));
     }
 
     empty(){
@@ -63,7 +63,9 @@ class Enemies{
 
     update(c,player){
         
-        if(this.empty() || Math.random() < 1 / 150){
+        const rand = Math.random() < 1 / 150;
+
+        if(this.empty() || rand){
             this.addEnemy(c);
         }
 

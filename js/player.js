@@ -1,4 +1,13 @@
 
+
+const grave = [];
+
+for(let i=0;i<3;i++){
+    grave[i] = new Image();
+    grave[i].src = `images/grave/grave_000${i}.png`;
+}
+
+
 class Player{
     constructor(){
         this.index = 2;
@@ -63,16 +72,38 @@ class Player{
             }
         }
 
+        // draw direction line
+        const dir = this.direction === 0? -1 : 1;
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(x,y);
+        ctx.lineTo(x + 300*dir,y);
+        ctx.stroke();
+
         // draw border
         const borderWidth = this.radius * 2;
         const bx1 = x - borderWidth * 1.5;
         const bx2 = x + borderWidth * .5;
         const height = 400 - top - 50;
-        const btop = top + 25;
-        ctx.fillStyle = `rgba(188,168,128,${this.borders[0]/this.maxHealth})`;
-        ctx.fillRect(bx1,btop,borderWidth,height)
-        ctx.fillStyle = `rgba(188,168,128,${this.borders[1]/this.maxHealth})`;
-        ctx.fillRect(bx2,btop,borderWidth,height);
+        const btop = top + 10;
+        // ctx.fillStyle = `rgba(188,168,128,${this.borders[0]/this.maxHealth})`;
+        // ctx.fillRect(bx1,btop,borderWidth,height)
+        // ctx.fillStyle = `rgba(188,168,128,${this.borders[1]/this.maxHealth})`;
+        // ctx.fillRect(bx2,btop,borderWidth,height);
+
+        let i1 = 0;
+        const h1 = this.borders[0]/this.maxHealth;
+        if(h1 < .5) i1 = 1;
+        if(this.borders[0] <= 0) i1 = 2;
+        
+        let i2 = 0;
+        const h2 = this.borders[1]/this.maxHealth;
+        if(h2 < .5) i2 = 1;
+        if(this.borders[1] <= 0) i2 = 2;
+
+        ctx.drawImage(grave[i1],bx1,btop,grave[i1].width*3,grave[i1].height*3);
+        ctx.drawImage(grave[i2],bx2,btop,grave[i2].width*3,grave[i2].height*3);
 
         // draw character
         ctx.fillStyle = "white";
@@ -80,14 +111,7 @@ class Player{
         ctx.arc(x,y,this.radius,0,2*Math.PI);
         ctx.fill();
 
-        // draw direction line
-        const dir = this.direction === 0? -1 : 1;
-        ctx.strokeStyle = "purple";
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.moveTo(x,y);
-        ctx.lineTo(x + 300*dir,y);
-        ctx.stroke();
+
 
     }
 }

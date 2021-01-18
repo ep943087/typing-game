@@ -1,4 +1,4 @@
-const backgroundColor = "white";
+const backgroundColor = "#182945";
 const colorLayer = ["rgba(30,134,40,1)","rgba(19,89,23,1)"]
 
 const drawBackground = (c,ctx,player) => {

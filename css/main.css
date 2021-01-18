@@ -4,15 +4,25 @@
     margin: 0;
 }
 
+body,html{
+    overflow-x: hidden;
+}
+
+body{
+    font-family: chiller,sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
 #myCanvas{
     width: 100%;
     height: 100%;
 }
 
 .game{
-    width: 100%;
+
     height: 400px;
-    max-width: 916px;
+    width: 916px;
     border: 1px solid black;
     margin-top: 100px;
     position: relative;
@@ -29,11 +39,18 @@
     background-color: rgba(206,152,95,1);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 25% 25% 25% 25%;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
     grid-template-areas: ". ." ". ." ". ." "play play";
     grid-gap: 5px;
     transition: transform .5s ease-in;
 }
+
+.game__menu *{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 .game__tools{
     display: flex;
@@ -71,6 +88,8 @@
 
 .play-button{
     grid-area: play;
+    font-size: 3rem;
+    border: 1px solid black;
 }
 
 .remove{
