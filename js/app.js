@@ -43,7 +43,7 @@ document.addEventListener('keydown',e=>{
             player.moveDown();
             break;
         default:
-            const hit = enemies.takeDamage(player,e.key);
+            const hit = enemies.takeDamage(player,e.key,c);
     }
 })
 
@@ -80,5 +80,10 @@ const draw = () => {
     }
     drawBackground(c,ctx,player);
 
+    enemies.drawDeadEnemies(ctx,player);
     enemies.draw(ctx,player);
+
+    if(player !== null){
+        player.drawFireballs(ctx);
+    }
 }

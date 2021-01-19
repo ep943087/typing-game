@@ -3,6 +3,13 @@ import Sprites from './sprites.js';
 
 const {mmwr,mmwl,jwl,jwr,fwl,fwr,lfl,lfr} = Sprites;
 
+const fire = [];
+
+for(let i=0;i<4;i++){
+    fire[i] = new Image();
+    fire[i].src = `images/fire/fire_000${i}.png`;
+}
+
 let words = ['beans','doritos','chicken','jalapenos','tostitos'];
 
 (async () => {
@@ -25,6 +32,9 @@ class Enemy{
         this.chooseEnemyType();
         this.walkIndex = 0;
         this.setWord();
+        this.hit = false;
+        this.deadFrame = 0;
+        this.dead = false;
     }
 
     chooseEnemyType(){
@@ -78,14 +88,18 @@ class Enemy{
         // ctx.fillStyle = this.color;
         // ctx.beginPath();
         // ctx.arc(this.x,this.y,this.radius,0,2*Math.PI);
-        // ctx.fill();
-
-
+        // ctx.fill()
         const img = this.getImage();
         // image
         const imgw = img.width*.9;
         const imgh = img.height*.9;
-        ctx.drawImage(img,this.x-imgw/2,this.y-imgh/2,imgw,imgh);
+        let hitx = 0;
+        if(this.hit){
+            if(this.direction === 0) hitx = -5;
+            else hitx = 5;
+        }
+        this.hit = false;
+        ctx.drawImage(img,this.x-imgw/2+hitx,this.y-imgh/2,imgw,imgh);
 
         // word
         const sp = 9;
@@ -105,6 +119,22 @@ class Enemy{
             }
             ctx.fillText(ch,start + sp/2 + index*sp,wordTop);
         })
+    }
+    drawDead(ctx,player){
+        this.draw(ctx,player);
+        const img = fire;
+        const fps = 30;
+        const index = Math.floor(this.deadFrame / fps * img.length);
+        this.deadFrame = this.deadFrame + 1;
+        if(this.deadFrame >= fps){
+            this.dead = true;
+        }
+        // ctx.fillStyle = "red";
+        // ctx.beginPath();
+        // ctx.arc(this.x,this.y,50,0,2*Math.PI);
+        // ctx.fill();
+
+        ctx.drawImage(img[index],this.x-img[index].width/2,this.y-img[index].height/2);
     }
 }
 

@@ -8,6 +8,7 @@ class Enemies{
     }
 
     initEnemies(){
+        this.deadEnemies = [];
         const michael = new Enemy();
         michael.enemyType = "mmr";
         michael.x = 100;
@@ -55,18 +56,23 @@ class Enemies{
             player.enemy = list[0];
     }
 
-    takeDamage(player,key){
+    takeDamage(player,key,c){
         if(player.enemy === null) return false;
         const {enemy} = player;
         const {index,word} = enemy;
         if(index < word.length && word[index] === key){
             enemy.index++;
+            player.addFireball(c);
             if(enemy.index >= word.length){
                 this.list[player.index][player.direction].shift();
+                this.deadEnemies.push(player.enemy)
                 player.kills++;
                 player.score += enemy.word.length*10;
                 player.resetEnemy();
+            } else{
+                enemy.hit = true;
             }
+            player.fireball = 30;
             return true;
         }
         return false;
@@ -126,6 +132,15 @@ class Enemies{
                 this.list[i][j].slice().reverse().forEach(e=>{
                     e.draw(ctx,player);
                 })
+            }
+        }
+    }
+
+    drawDeadEnemies(ctx,player){
+        for(let i=this.deadEnemies.length-1;i>=0;i--){
+            this.deadEnemies[i].drawDead(ctx,player);
+            if(this.deadEnemies[i].dead){
+                this.deadEnemies.splice(i,1);
             }
         }
     }
