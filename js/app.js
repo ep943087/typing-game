@@ -30,15 +30,19 @@ document.addEventListener('keydown',e=>{
     if(state !== "game" || player === null) return;
     e.preventDefault();
     switch(e.keyCode){
+        case 56:
         case 37:
             player.lookLeft();
             break;
+        case 50:
         case 38:
             player.moveUp();
             break;
+        case 57:
         case 39:
             player.lookRight();
             break;
+        case 51:
         case 40:
             player.moveDown();
             break;
